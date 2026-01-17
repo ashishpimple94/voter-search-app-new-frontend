@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Search Test</title>
+</head>
+<body>
+    <h2>Test Voter Search</h2>
+    
+    <div>
+        <label>First Name: <input type="text" id="firstName" value="ADAGLE"></label><br><br>
+        <label>Middle Name: <input type="text" id="middleName" value="RAOSAHEB"></label><br><br>
+        <label>Last Name: <input type="text" id="lastName" value="KISAN"></label><br><br>
+        <button onclick="performSearch()">Search</button>
+    </div>
+    
+    <div id="results" style="margin-top: 20px;"></div>
+
+    <script>
+        async function performSearch() {
+            const firstName = document.getElementById('firstName').value;
+            const middleName = document.getElementById('middleName').value;
+            const lastName = document.getElementById('lastName').value;
+            
+            // Combine names like the React app does
+            const searchQuery = `${firstName} ${middleName} ${lastName}`.trim();
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Searching...</p>';
+            
+            try {
+                console.log('Searching for:', searchQuery);
+                
+                const response = await fetch(`https://prabhag8-backend-1.onrender.com/api/voters/search?query=${encodeURIComponent(searchQuery)}`);
+                const data = await response.json();
+                
+                console.log('API Response:', data);
+                
+                if (data.success && data.data.length > 0) {
+                    const voter = data.data[0];
+                    resultsDiv.innerHTML = `
+                        <h3>✅ Found Voter!</h3>
+                        <p><strong>Name:</strong> ${voter.name}</p>
+                        <p><strong>Voter ID:</strong> ${voter.EPIC_NO}</p>
+                        <p><strong>Age:</strong> ${voter.age}</p>
+                        <p><strong>Gender:</strong> ${voter.gender}</p>
+                        <p><strong>Constituency:</strong> ${voter.AC_NO}</p>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = '<p>❌ No voters found</p>';
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<p>❌ Error: ${error.message}</p>`;
+                console.error('Search error:', error);
+            }
+        }
+        
+        // Auto-run test
+        window.onload = performSearch;
+    </script>
+</body>
+</html>
