@@ -91,7 +91,7 @@ export const SearchBar = ({ onSearch, recentSearches, isLoading }) => {
 
       <form onSubmit={handleSearch} className="space-y-4">
         {/* Search Type Selector - Radio Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className={`flex items-center gap-3 cursor-pointer p-3 border-2 transition ${searchType === 'name' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 bg-white'}`}>
             <input
               type="radio"
@@ -117,19 +117,6 @@ export const SearchBar = ({ onSearch, recentSearches, isLoading }) => {
               <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
             <span className="text-sm font-semibold text-gray-700">By Voter ID</span>
-          </label>
-          <label className={`flex items-center gap-3 cursor-pointer p-3 border-2 transition ${searchType === 'constituency' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 bg-white'}`}>
-            <input
-              type="radio"
-              value="constituency"
-              checked={searchType === 'constituency'}
-              onChange={(e) => setSearchType(e.target.value)}
-              className="w-4 h-4 text-blue-600"
-            />
-            <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-            </svg>
-            <span className="text-sm font-semibold text-gray-700">By Constituency</span>
           </label>
         </div>
 
@@ -167,20 +154,6 @@ export const SearchBar = ({ onSearch, recentSearches, isLoading }) => {
                   className="w-full px-3 py-2 border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm"
                 />
               </div>
-            </div>
-          ) : searchType === 'constituency' ? (
-            <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1">निर्वाचन क्षेत्र / Select Constituency</label>
-              <select
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full px-3 py-2 border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm"
-              >
-                <option value="">Choose a constituency...</option>
-                {constituencies.map(c => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
             </div>
           ) : (
             <div>
