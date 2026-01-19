@@ -1,16 +1,9 @@
-import React from 'react';
-import { formatDate } from '../utils/validation';
-
 export const ResultsList = ({
   results,
   totalCount,
-  currentPage,
-  pageSize,
-  onPageChange,
   onVoterSelect,
   isLoading
 }) => {
-  const totalPages = Math.ceil(totalCount / pageSize);
 
   if (isLoading) {
     return (
@@ -85,6 +78,10 @@ export const ResultsList = ({
                 <div className="bg-red-50 p-2">
                   <p className="font-bold text-gray-600">AC_NO</p>
                   <p className="text-gray-900 font-semibold">{voter.constituency || 'N/A'}</p>
+                </div>
+                <div className="bg-yellow-50 p-2">
+                  <p className="font-bold text-gray-600">PART_NO</p>
+                  <p className="text-gray-900 font-semibold">{voter.partNumber || 'N/A'}</p>
                 </div>
                 <div className="bg-indigo-50 p-2 col-span-2">
                   <p className="font-bold text-gray-600">PART_NAME (मराठी)</p>
