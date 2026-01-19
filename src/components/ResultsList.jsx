@@ -52,92 +52,56 @@ export const ResultsList = ({
             className="bg-white p-4 border-2 border-gray-300 hover:border-blue-500 hover:shadow-lg cursor-pointer transition"
           >
             <div className="space-y-3">
-              {/* Name Section */}
-              <div className="pb-3 border-b border-gray-200">
-                <p className="text-lg font-bold text-gray-900">
-                  {[voter.firstName, voter.middleName, voter.lastName].filter(Boolean).join(' ')}
-                </p>
-                <p className="text-xs text-gray-600 mt-1">
-                  <span className="font-bold">EPIC_NO:</span> <span className="text-blue-600 font-semibold">{voter.voterId}</span>
-                </p>
-              </div>
-
-              {/* Info Grid - Only show fields with data */}
+              {/* Info Grid - Only required fields */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                {voter.gender && voter.gender !== 'N/A' && (
-                  <div className="bg-blue-50 p-2">
-                    <p className="font-bold text-gray-600">Gender</p>
-                    <p className="text-gray-900 font-semibold">{voter.gender}</p>
-                  </div>
-                )}
-                {voter.age && voter.age !== 'N/A' && (
-                  <div className="bg-green-50 p-2">
-                    <p className="font-bold text-gray-600">Age</p>
-                    <p className="text-gray-900 font-semibold">{voter.age}</p>
-                  </div>
-                )}
-                {voter.serialNumber && voter.serialNumber !== 'N/A' && (
-                  <div className="bg-purple-50 p-2">
-                    <p className="font-bold text-gray-600">Serial No.</p>
-                    <p className="text-gray-900 font-semibold">{voter.serialNumber}</p>
-                  </div>
-                )}
-                {voter.constituency && voter.constituency !== 'N/A' && (
-                  <div className="bg-orange-50 p-2">
-                    <p className="font-bold text-gray-600">Constituency</p>
-                    <p className="text-gray-900 font-semibold">{voter.constituency}</p>
-                  </div>
-                )}
-                {voter.mobileNumber && voter.mobileNumber !== 'N/A' && (
-                  <div className="bg-pink-50 p-2">
-                    <p className="font-bold text-gray-600">Mobile</p>
-                    <p className="text-gray-900 font-semibold">{voter.mobileNumber}</p>
-                  </div>
-                )}
-                {voter.dob && voter.dob !== 'N/A' && (
-                  <div className="bg-yellow-50 p-2">
-                    <p className="font-bold text-gray-600">DOB</p>
-                    <p className="text-gray-900 font-semibold">{voter.dob}</p>
-                  </div>
-                )}
-                {voter.houseNumber && voter.houseNumber !== 'N/A' && (
-                  <div className="bg-cyan-50 p-2">
-                    <p className="font-bold text-gray-600">House No.</p>
-                    <p className="text-gray-900 font-semibold">{voter.houseNumber}</p>
-                  </div>
-                )}
-                {voter.partNumber && voter.partNumber !== 'N/A' && (
-                  <div className="bg-lime-50 p-2">
-                    <p className="font-bold text-gray-600">Part No.</p>
-                    <p className="text-gray-900 font-semibold">{voter.partNumber}</p>
-                  </div>
-                )}
-                {voter.sectionNumber && voter.sectionNumber !== 'N/A' && (
-                  <div className="bg-rose-50 p-2">
-                    <p className="font-bold text-gray-600">Section No.</p>
-                    <p className="text-gray-900 font-semibold">{voter.sectionNumber}</p>
-                  </div>
-                )}
-                {voter.relationType && voter.relationType !== 'N/A' && (
-                  <div className="bg-violet-50 p-2">
-                    <p className="font-bold text-gray-600">Relation Type</p>
-                    <p className="text-gray-900 font-semibold">{voter.relationType}</p>
-                  </div>
-                )}
-                <div className="bg-red-50 p-2 col-span-2">
-                  <p className="font-bold text-gray-600">PART_NAME (हिंदी)</p>
-                  <p className="text-gray-900 font-semibold text-xs">{voter.partName || 'N/A'}</p>
+                <div className="bg-blue-50 p-2">
+                  <p className="font-bold text-gray-600">S.NO</p>
+                  <p className="text-gray-900 font-semibold">{voter.serialNumber || 'N/A'}</p>
+                </div>
+                <div className="bg-green-50 p-2">
+                  <p className="font-bold text-gray-600">VOTER FIRSTNAME</p>
+                  <p className="text-gray-900 font-semibold">{voter.firstName || 'N/A'}</p>
+                </div>
+                <div className="bg-purple-50 p-2">
+                  <p className="font-bold text-gray-600">VOTER LASTNAME</p>
+                  <p className="text-gray-900 font-semibold">{voter.lastName || 'N/A'}</p>
+                </div>
+                <div className="bg-orange-50 p-2">
+                  <p className="font-bold text-gray-600">VOTER NAME</p>
+                  <p className="text-gray-900 font-semibold">{[voter.firstName, voter.middleName, voter.lastName].filter(Boolean).join(' ') || 'N/A'}</p>
+                </div>
+                <div className="bg-pink-50 p-2">
+                  <p className="font-bold text-gray-600">firstname</p>
+                  <p className="text-gray-900 font-semibold">{voter.firstName || 'N/A'}</p>
+                </div>
+                <div className="bg-yellow-50 p-2">
+                  <p className="font-bold text-gray-600">middlename</p>
+                  <p className="text-gray-900 font-semibold">{voter.middleName || 'N/A'}</p>
+                </div>
+                <div className="bg-cyan-50 p-2">
+                  <p className="font-bold text-gray-600">lastname</p>
+                  <p className="text-gray-900 font-semibold">{voter.lastName || 'N/A'}</p>
+                </div>
+                <div className="bg-lime-50 p-2">
+                  <p className="font-bold text-gray-600">AGE</p>
+                  <p className="text-gray-900 font-semibold">{voter.age || 'N/A'}</p>
+                </div>
+                <div className="bg-rose-50 p-2">
+                  <p className="font-bold text-gray-600">GENDER</p>
+                  <p className="text-gray-900 font-semibold">{voter.gender || 'N/A'}</p>
+                </div>
+                <div className="bg-violet-50 p-2">
+                  <p className="font-bold text-gray-600">EPIC NO</p>
+                  <p className="text-gray-900 font-semibold">{voter.voterId || 'N/A'}</p>
+                </div>
+                <div className="bg-red-50 p-2">
+                  <p className="font-bold text-gray-600">AC_NO</p>
+                  <p className="text-gray-900 font-semibold">{voter.constituency || 'N/A'}</p>
                 </div>
                 <div className="bg-indigo-50 p-2 col-span-2">
-                  <p className="font-bold text-gray-600">PART_NAME (English)</p>
-                  <p className="text-gray-900 font-semibold text-xs">{voter.partNameEng || 'N/A'}</p>
+                  <p className="font-bold text-gray-600">PART_NAME</p>
+                  <p className="text-gray-900 font-semibold text-xs">{voter.partName || 'N/A'}</p>
                 </div>
-                {voter.address && voter.address !== 'N/A' && (
-                  <div className="bg-gray-50 p-2 col-span-2">
-                    <p className="font-bold text-gray-600">Address</p>
-                    <p className="text-gray-900 font-semibold text-xs">{voter.address}</p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
