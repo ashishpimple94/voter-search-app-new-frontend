@@ -161,48 +161,42 @@ export const fetchVoters = async (searchType, searchValue) => {
       return voters.map(transformVoter);
     }
 
-    // If no voters found and this is a name search with multiple parts, try a fuzzy fallback
+    // If no voters found and this is a name search, try a fuzzy fallback
     if (searchType === 'name') {
       const tokens = normalizedSearchValue.split(' ').filter(Boolean);
-      if (tokens.length >= 2) {
-        const lastNameToken = tokens[tokens.length - 1];
-        console.log('🧪 No exact matches, trying fallback search with last name token:', lastNameToken);
+      
+      // Try searching with each token individually for better prefix matching
+      for (const token of tokens) {
+        if (token.length >= 3) {
+          console.log('🧪 No exact matches, trying fallback search with token:', token);
 
-        const fallbackEndpoint = `${API_BASE_URL}/voters/search?query=${encodeURIComponent(lastNameToken)}`;
-        console.log('🧪 Fallback API Request - Endpoint:', fallbackEndpoint);
+          const fallbackEndpoint = `${API_BASE_URL}/voters/search?query=${encodeURIComponent(token)}`;
+          console.log('🧪 Fallback API Request - Endpoint:', fallbackEndpoint);
 
-        const fallbackResponse = await fetch(fallbackEndpoint, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          mode: 'cors',
-        });
-
-        console.log('📊 Fallback API Response Status:', fallbackResponse.status);
-
-        if (fallbackResponse.ok) {
-          const fallbackData = await fallbackResponse.json();
-          console.log('Fallback API Response:', fallbackData);
-
-          let fallbackVoters = Array.isArray(fallbackData)
-            ? fallbackData
-            : (fallbackData.data || fallbackData.voters || []);
-
-          console.log('Voters extracted (fallback):', fallbackVoters.length);
-
-          // Fuzzy match on full name to find closest matches to the user query
-          const targetFullName = normalizedSearchValue;
-
-          fallbackVoters = fallbackVoters.filter((v) => {
-            const nameFromApi = v.name || v.Name || v.VOTER_NAME || '';
-            return isCloseNameMatch(nameFromApi, targetFullName);
+          const fallbackResponse = await fetch(fallbackEndpoint, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            mode: 'cors',
           });
 
-          console.log('Voters after fuzzy filter:', fallbackVoters.length);
+          console.log('📊 Fallback API Response Status:', fallbackResponse.status);
 
-          if (fallbackVoters.length > 0) {
-            return fallbackVoters.map(transformVoter);
+          if (fallbackResponse.ok) {
+            const fallbackData = await fallbackResponse.json();
+            console.log('Fallback API Response:', fallbackData);
+
+            let fallbackVoters = Array.isArray(fallbackData)
+              ? fallbackData
+              : (fallbackData.data || fallbackData.voters || []);
+
+            console.log('Voters extracted (fallback):', fallbackVoters.length);
+
+            if (fallbackVoters.length > 0) {
+              // Return all matching voters, not just filtered ones
+              return fallbackVoters.map(transformVoter);
+            }
           }
         }
       }

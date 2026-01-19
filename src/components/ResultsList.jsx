@@ -39,13 +39,13 @@ export const ResultsList = ({
       {/* Results Count */}
       <div className="bg-yellow-100 border-l-4 border-yellow-500 p-3 shadow-md">
         <p className="text-sm font-bold text-gray-800">
-          Found <span className="text-yellow-700">{totalCount}</span> voter{totalCount !== 1 ? 's' : ''} - Showing top result
+          Found <span className="text-yellow-700">{totalCount}</span> voter{totalCount !== 1 ? 's' : ''}
         </p>
       </div>
 
       {/* Voter Cards */}
       <div className="space-y-3">
-        {results.slice(0, 1).map(voter => (
+        {results.map(voter => (
           <div
             key={voter.id}
             onClick={() => onVoterSelect(voter)}
