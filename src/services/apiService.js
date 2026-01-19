@@ -158,6 +158,18 @@ export const fetchVoters = async (searchType, searchValue) => {
     
     if (voters.length > 0) {
       console.log('First voter raw:', voters[0]);
+      
+      // If search has multiple words (full name), filter for exact/close matches
+      const tokens = normalizedSearchValue.split(' ').filter(Boolean);
+      if (tokens.length >= 2) {
+        console.log('🔍 Full name search detected, filtering for close matches');
+        voters = voters.filter((v) => {
+          const nameFromApi = v.name || v.Name || v.VOTER_NAME || '';
+          return isCloseNameMatch(nameFromApi, normalizedSearchValue);
+        });
+        console.log('Voters after fuzzy filter:', voters.length);
+      }
+      
       // Transform voters to app format
       return voters.map(transformVoter);
     }
@@ -195,7 +207,17 @@ export const fetchVoters = async (searchType, searchValue) => {
             console.log('Voters extracted (fallback):', fallbackVoters.length);
 
             if (fallbackVoters.length > 0) {
-              // Return all matching voters, not just filtered ones
+              // If original search had multiple words, filter for close matches
+              if (tokens.length >= 2) {
+                console.log('🔍 Full name search detected, filtering for close matches');
+                fallbackVoters = fallbackVoters.filter((v) => {
+                  const nameFromApi = v.name || v.Name || v.VOTER_NAME || '';
+                  return isCloseNameMatch(nameFromApi, normalizedSearchValue);
+                });
+                console.log('Voters after fuzzy filter:', fallbackVoters.length);
+              }
+              
+              // Return matching voters
               return fallbackVoters.map(transformVoter);
             }
           }

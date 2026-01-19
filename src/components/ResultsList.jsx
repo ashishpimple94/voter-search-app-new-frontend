@@ -81,14 +81,6 @@ export const ResultsList = ({
                   <p className="text-gray-900 font-semibold">{voter.constituency}</p>
                 </div>
                 <div className="bg-red-50 p-2 col-span-2">
-                  <p className="font-bold text-gray-600">Part Number</p>
-                  <p className="text-gray-900 font-semibold">{voter.partNumber}</p>
-                </div>
-                <div className="bg-indigo-50 p-2 col-span-2">
-                  <p className="font-bold text-gray-600">PART_NAME (हिंदी)</p>
-                  <p className="text-gray-900 font-semibold text-xs">{voter.partName}</p>
-                </div>
-                <div className="bg-gray-50 p-2 col-span-2">
                   <p className="font-bold text-gray-600">Address</p>
                   <p className="text-gray-900 font-semibold text-xs">{voter.address}</p>
                 </div>
