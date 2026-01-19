@@ -115,14 +115,22 @@ const transformVoter = (voter) => {
     }
   }
   
-  // Extract part name from POLLING_STATION_ADR1 if PART_NAME is empty
+  // Extract part name from POLLING_STATION_ADR1 if PART_NAME_ENG is empty
   // Format: "Prabhag Kra : 8 Aundh Bopodi Yadi Bhag . 62 1 - Da Ambedakar Wamahat Di Pi Roda Ne"
   // Extract the part after the dash
   let partNameEng = voter.PART_NAME_ENG || voter.partNameEng || voter.part_name_eng || voter.PART_NAME_EN || '';
   if (!partNameEng && voter.POLLING_STATION_ADR1) {
     const parts = voter.POLLING_STATION_ADR1.split('-');
     if (parts.length > 1) {
-      partNameEng = parts[1].trim(); // Get the part after the dash
+      partNameEng = parts[parts.length - 1].trim(); // Get the last part after the last dash
+    }
+  }
+  
+  // Also try to extract from POLLING_CENTER if still empty
+  if (!partNameEng && voter.POLLING_CENTER) {
+    const parts = voter.POLLING_CENTER.split('-');
+    if (parts.length > 1) {
+      partNameEng = parts[parts.length - 1].trim(); // Get the last part after the last dash
     }
   }
   
