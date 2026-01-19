@@ -108,6 +108,11 @@ const transformVoter = (voter) => {
     gender: voter.gender || voter.Gender || 'N/A',
     constituency: voter.constituency || voter.AC_NO || voter.Constituency || 'N/A',
     age: voter.age || voter.Age || 'N/A',
+    mobileNumber: voter.mobileNumber || voter.MOBILE_NO || 'N/A',
+    dob: voter.DOB || voter.dob || 'N/A',
+    houseNumber: voter.houseNumber || voter.C_HOUSE_NO || voter.HOUSE_NO || 'N/A',
+    sectionNumber: voter.SECTION_NO || voter.sectionNumber || 'N/A',
+    relationType: voter.RLN_TYPE || voter.relationType || 'N/A',
     registrationDate: voter.createdAt || new Date().toISOString(),
     address: voter.address || voter.adr1 || voter.Address || 'N/A',
     status: 'Active'
