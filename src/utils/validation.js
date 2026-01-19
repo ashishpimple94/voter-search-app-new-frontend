@@ -15,10 +15,10 @@ export const validateSearchQuery = (query) => {
     };
   }
 
-  if (query.trim().length < 2) {
+  if (query.trim().length < 3) {
     return {
       isValid: false,
-      error: 'Search term must be at least 2 characters'
+      error: 'Search term must be at least 3 characters'
     };
   }
 
