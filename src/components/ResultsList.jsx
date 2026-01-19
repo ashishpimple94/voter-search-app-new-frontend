@@ -124,18 +124,14 @@ export const ResultsList = ({
                     <p className="text-gray-900 font-semibold">{voter.relationType}</p>
                   </div>
                 )}
-                {voter.partName && voter.partName !== 'N/A' && (
-                  <div className="bg-red-50 p-2 col-span-2">
-                    <p className="font-bold text-gray-600">PART_NAME (हिंदी)</p>
-                    <p className="text-gray-900 font-semibold text-xs">{voter.partName}</p>
-                  </div>
-                )}
-                {voter.partNameEng && voter.partNameEng !== 'N/A' && (
-                  <div className="bg-indigo-50 p-2 col-span-2">
-                    <p className="font-bold text-gray-600">PART_NAME (English)</p>
-                    <p className="text-gray-900 font-semibold text-xs">{voter.partNameEng}</p>
-                  </div>
-                )}
+                <div className="bg-red-50 p-2 col-span-2">
+                  <p className="font-bold text-gray-600">PART_NAME (हिंदी)</p>
+                  <p className="text-gray-900 font-semibold text-xs">{voter.partName || 'N/A'}</p>
+                </div>
+                <div className="bg-indigo-50 p-2 col-span-2">
+                  <p className="font-bold text-gray-600">PART_NAME (English)</p>
+                  <p className="text-gray-900 font-semibold text-xs">{voter.partNameEng || 'N/A'}</p>
+                </div>
                 {voter.address && voter.address !== 'N/A' && (
                   <div className="bg-gray-50 p-2 col-span-2">
                     <p className="font-bold text-gray-600">Address</p>
