@@ -115,6 +115,17 @@ const transformVoter = (voter) => {
     }
   }
   
+  // Extract part name from POLLING_STATION_ADR1 if PART_NAME is empty
+  // Format: "Prabhag Kra : 8 Aundh Bopodi Yadi Bhag . 62 1 - Da Ambedakar Wamahat Di Pi Roda Ne"
+  // Extract the part after the dash
+  let partNameEng = voter.PART_NAME_ENG || voter.partNameEng || voter.part_name_eng || voter.PART_NAME_EN || '';
+  if (!partNameEng && voter.POLLING_STATION_ADR1) {
+    const parts = voter.POLLING_STATION_ADR1.split('-');
+    if (parts.length > 1) {
+      partNameEng = parts[1].trim(); // Get the part after the dash
+    }
+  }
+  
   return {
     id: voter._id || voter.EPIC_NO || Math.random().toString(),
     voterId: voter.EPIC_NO || voter.voterIdCard || 'N/A',
@@ -123,7 +134,7 @@ const transformVoter = (voter) => {
     lastName: nameParts.lastName,
     serialNumber: voter.serialNumber || partSNO || 'N/A',
     partName: voter.PART_NAME || voter.partName || voter.part_name || voter.PART_NAME_MR || 'N/A',
-    partNameEng: voter.PART_NAME_ENG || voter.partNameEng || voter.part_name_eng || voter.PART_NAME_EN || 'N/A',
+    partNameEng: partNameEng || 'N/A',
     partNumber: partNumber || 'N/A',
     gender: voter.gender || voter.Gender || 'N/A',
     constituency: voter.AC_NO || voter.constituency || voter.Constituency || 'N/A',
