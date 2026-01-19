@@ -52,55 +52,47 @@ export const ResultsList = ({
             className="bg-white p-4 border-2 border-gray-300 hover:border-blue-500 hover:shadow-lg cursor-pointer transition"
           >
             <div className="space-y-3">
-              {/* Info Grid - Only required fields */}
+              {/* Info Grid - Only fields with actual data */}
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="bg-blue-50 p-2">
                   <p className="font-bold text-gray-600">S.NO</p>
-                  <p className="text-gray-900 font-semibold">{voter.serialNumber || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.serialNumber}</p>
                 </div>
                 <div className="bg-green-50 p-2">
                   <p className="font-bold text-gray-600">VOTER FIRSTNAME</p>
-                  <p className="text-gray-900 font-semibold">{voter.firstName || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.firstName}</p>
                 </div>
                 <div className="bg-purple-50 p-2">
                   <p className="font-bold text-gray-600">VOTER LASTNAME</p>
-                  <p className="text-gray-900 font-semibold">{voter.lastName || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.lastName}</p>
                 </div>
                 <div className="bg-orange-50 p-2">
                   <p className="font-bold text-gray-600">VOTER NAME</p>
-                  <p className="text-gray-900 font-semibold">{[voter.firstName, voter.middleName, voter.lastName].filter(Boolean).join(' ') || 'N/A'}</p>
-                </div>
-                <div className="bg-pink-50 p-2">
-                  <p className="font-bold text-gray-600">firstname</p>
-                  <p className="text-gray-900 font-semibold">{voter.firstName || 'N/A'}</p>
-                </div>
-                <div className="bg-yellow-50 p-2">
-                  <p className="font-bold text-gray-600">middlename</p>
-                  <p className="text-gray-900 font-semibold">{voter.middleName || 'N/A'}</p>
-                </div>
-                <div className="bg-cyan-50 p-2">
-                  <p className="font-bold text-gray-600">lastname</p>
-                  <p className="text-gray-900 font-semibold">{voter.lastName || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{[voter.firstName, voter.middleName, voter.lastName].filter(Boolean).join(' ')}</p>
                 </div>
                 <div className="bg-lime-50 p-2">
                   <p className="font-bold text-gray-600">AGE</p>
-                  <p className="text-gray-900 font-semibold">{voter.age || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.age}</p>
                 </div>
                 <div className="bg-rose-50 p-2">
                   <p className="font-bold text-gray-600">GENDER</p>
-                  <p className="text-gray-900 font-semibold">{voter.gender || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.gender}</p>
                 </div>
                 <div className="bg-violet-50 p-2">
                   <p className="font-bold text-gray-600">EPIC NO</p>
-                  <p className="text-gray-900 font-semibold">{voter.voterId || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.voterId}</p>
                 </div>
                 <div className="bg-red-50 p-2">
                   <p className="font-bold text-gray-600">AC_NO</p>
-                  <p className="text-gray-900 font-semibold">{voter.constituency || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold">{voter.constituency}</p>
+                </div>
+                <div className="bg-cyan-50 p-2">
+                  <p className="font-bold text-gray-600">PART_NO</p>
+                  <p className="text-gray-900 font-semibold">{voter.partNumber}</p>
                 </div>
                 <div className="bg-indigo-50 p-2 col-span-2">
                   <p className="font-bold text-gray-600">PART_NAME</p>
-                  <p className="text-gray-900 font-semibold text-xs">{voter.partName || 'N/A'}</p>
+                  <p className="text-gray-900 font-semibold text-xs">{voter.partName}</p>
                 </div>
               </div>
             </div>
