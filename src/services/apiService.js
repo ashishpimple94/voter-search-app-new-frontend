@@ -213,6 +213,10 @@ export const fetchVoters = async (searchType, searchValue) => {
         });
         console.log('Voters after fuzzy filter:', voters.length);
       }
+      // For 3-letter searches (single token), show all results
+      else if (tokens.length === 1 && tokens[0].length === 3) {
+        console.log('✅ 3-letter search - showing all results');
+      }
       
       // Transform voters to app format
       return voters.map(transformVoter);
@@ -259,6 +263,10 @@ export const fetchVoters = async (searchType, searchValue) => {
                   return isCloseNameMatch(nameFromApi, normalizedSearchValue);
                 });
                 console.log('Voters after fuzzy filter:', fallbackVoters.length);
+              }
+              // For 3-letter searches, show all results
+              else if (tokens.length === 1 && token.length === 3) {
+                console.log('✅ 3-letter search - showing all results');
               }
               
               // Return matching voters
