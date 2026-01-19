@@ -86,10 +86,6 @@ export const ResultsList = ({
                   <p className="font-bold text-gray-600">AC_NO</p>
                   <p className="text-gray-900 font-semibold">{voter.constituency}</p>
                 </div>
-                <div className="bg-cyan-50 p-2">
-                  <p className="font-bold text-gray-600">PART_NO</p>
-                  <p className="text-gray-900 font-semibold">{voter.partNumber}</p>
-                </div>
                 <div className="bg-indigo-50 p-2 col-span-2">
                   <p className="font-bold text-gray-600">PART_NAME</p>
                   <p className="text-gray-900 font-semibold text-xs">{voter.partName}</p>
