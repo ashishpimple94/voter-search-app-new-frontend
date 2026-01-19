@@ -95,18 +95,38 @@ const transformVoter = (voter) => {
   
   console.log('Raw voter data:', voter); // Debug log
   
+  // Extract part number from AC_NO if PART_NO is empty
+  // AC_NO format can be "209" or "209/62/1215" where 62 is the part number
+  let partNumber = voter.PART_NO || voter.partNumber || voter.part_no || voter.pp || '';
+  if (!partNumber && voter.AC_NO) {
+    const acNoParts = voter.AC_NO.split('/');
+    if (acNoParts.length > 1) {
+      partNumber = acNoParts[1]; // Get the middle part (part number)
+    }
+  }
+  
+  // Extract part SNO from AC_NO if SLNOINPART is empty
+  // AC_NO format: "209/62/1215" where 1215 is the serial number in part
+  let partSNO = voter.SLNOINPART || voter.SL_NO_IN_PART || '';
+  if (!partSNO && voter.AC_NO) {
+    const acNoParts = voter.AC_NO.split('/');
+    if (acNoParts.length > 2) {
+      partSNO = acNoParts[2]; // Get the last part (serial number in part)
+    }
+  }
+  
   return {
     id: voter._id || voter.EPIC_NO || Math.random().toString(),
     voterId: voter.EPIC_NO || voter.voterIdCard || 'N/A',
     firstName: nameParts.firstName,
     middleName: nameParts.middleName,
     lastName: nameParts.lastName,
-    serialNumber: voter.serialNumber || voter.SLNOINPART || voter.SL_NO_IN_PART || 'N/A',
+    serialNumber: voter.serialNumber || partSNO || 'N/A',
     partName: voter.PART_NAME || voter.partName || voter.part_name || voter.PART_NAME_MR || 'N/A',
     partNameEng: voter.PART_NAME_ENG || voter.partNameEng || voter.part_name_eng || voter.PART_NAME_EN || 'N/A',
-    partNumber: voter.PART_NO || voter.partNumber || voter.part_no || voter.pp || 'N/A',
+    partNumber: partNumber || 'N/A',
     gender: voter.gender || voter.Gender || 'N/A',
-    constituency: voter.constituency || voter.AC_NO || voter.Constituency || 'N/A',
+    constituency: voter.AC_NO || voter.constituency || voter.Constituency || 'N/A',
     age: voter.age || voter.Age || 'N/A',
     mobileNumber: voter.mobileNumber || voter.MOBILE_NO || 'N/A',
     dob: voter.DOB || voter.dob || 'N/A',
