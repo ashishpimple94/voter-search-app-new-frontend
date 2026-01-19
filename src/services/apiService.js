@@ -102,13 +102,14 @@ const transformVoter = (voter) => {
     middleName: nameParts.middleName,
     lastName: nameParts.lastName,
     serialNumber: voter.serialNumber || voter.SLNOINPART || 'N/A',
-    partName: voter.PART_NAME || 'N/A',
-    partNameEng: voter.PART_NAME_ENG || 'N/A',
-    gender: voter.gender || 'N/A',
-    constituency: voter.constituency || voter.AC_NO || 'N/A',
-    age: voter.age || 'N/A',
+    partName: voter.PART_NAME || voter.partName || voter.part_name || 'N/A',
+    partNameEng: voter.PART_NAME_ENG || voter.partNameEng || voter.part_name_eng || 'N/A',
+    partNumber: voter.PART_NO || voter.partNumber || voter.part_no || 'N/A',
+    gender: voter.gender || voter.Gender || 'N/A',
+    constituency: voter.constituency || voter.AC_NO || voter.Constituency || 'N/A',
+    age: voter.age || voter.Age || 'N/A',
     registrationDate: voter.createdAt || new Date().toISOString(),
-    address: voter.address || voter.adr1 || 'N/A',
+    address: voter.address || voter.adr1 || voter.Address || 'N/A',
     status: 'Active'
   };
 };
